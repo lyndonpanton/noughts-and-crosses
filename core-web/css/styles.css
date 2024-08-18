@@ -20,6 +20,10 @@ h2 {
     padding: 0;
 }
 
+#button-restart {
+    
+}
+
 .cell {
     display: block;
     border-collapse: collapse;

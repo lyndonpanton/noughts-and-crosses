@@ -8,20 +8,29 @@ for (let i = 0; i < boardElements.children.length; i++) {
     board[i] = boardElements.children[i];
 }
 
+let restartButton =
+    document.getElementById("button-restart");
+
+restartButton.addEventListener("click", startGame);
+
 startGame();
 
 function startGame() {
-    // Clear previous cell styling
-    
-    // Users should be able to either:
+    // Users should be able to either (these options should be displayed once
+    // a move has been played):
     // 1. Select who starts explicitly
     // 2. State that each game should toggle between starting player
     // 3. State that a random player should start
     turn = "X";
     winningCells = [];
-
+    
+    // Clear previous cell content
+    // Clear previous cell styling
     // Add cell event listeners
-    for (let i = 0; i < boardElements.children.length; i++) {
+    
+    for (let i = 0; i < board.length; i++) {
+        board[i].textContent = "";
+        board[i].classList.remove("winning-cell");
         board[i].addEventListener("click", cellClick, false);
     }
 }
