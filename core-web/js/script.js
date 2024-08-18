@@ -121,11 +121,12 @@ function endGame() {
         + ")"
     );
     // Denote that a particular player has won via text
-    for (let i = 0; i < winningCells.length; i++) {
-        // board[winningCells[i]].className
-    }
     
     // Highlight winning cells
+    for (let i = 0; i < winningCells.length; i++) {
+        board[winningCells[i]].classList.add("winning-cell");
+    }
+    
     
     // Remove cell event listeners / Disable cells
     for (let i = 0; i < boardElements.children.length; i++) {

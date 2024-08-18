@@ -32,6 +32,10 @@ h2 {
     font-size: 80px;
 }
 
+.winning-cell {
+    background-color: forestgreen;
+}
+
 /* Tablet */
 
 /* Laptop */
