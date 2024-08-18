@@ -22,12 +22,14 @@ h2 {
 
 .cell {
     display: block;
+    border-collapse: collapse;
     float: left;
     -webkit-margin-collapse: collapse;
     border: 1px black solid;
     width: 125px;
     height: 125px;
-    border-collapse: collapse;
+    text-align: center;
+    font-size: 80px;
 }
 
 /* Tablet */
