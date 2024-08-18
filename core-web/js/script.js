@@ -2,6 +2,7 @@ const boardElements = document.getElementById("board");
 
 let board = [];
 let winningCells = [];
+let winningText = document.getElementById("winning-text");
 let turn = "";
 
 for (let i = 0; i < boardElements.children.length; i++) {
@@ -23,6 +24,7 @@ function startGame() {
     // 3. State that a random player should start
     turn = "X";
     winningCells = [];
+    winningText.textContent = "";
     
     // Clear previous cell content
     // Clear previous cell styling
@@ -125,18 +127,13 @@ function checkWin() {
 }
 
 function endGame() {
-    console.log(turn + " wins! ("
-        + winningCells[0] + ", " + winningCells[1] + ", " + winningCells[2]
-        + ")"
-    );
-    
     // Denote that a particular player has won via text
+    winningText.textContent = turn + " wins!";
     
-    // Highlight winning cells
+    // Denote that a particular player has won via highlighting winning cells
     for (let i = 0; i < winningCells.length; i++) {
         board[winningCells[i]].classList.add("winning-cell");
     }
-    
     
     // Remove cell event listeners / Disable cells
     for (let i = 0; i < boardElements.children.length; i++) {
