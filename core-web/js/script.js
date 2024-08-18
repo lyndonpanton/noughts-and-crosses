@@ -3,7 +3,8 @@ const boardElements = document.getElementById("board");
 board = [];
 
 for (let i = 0; i < boardElements.children.length; i++) {
-    board[i] = boardElements[i];
+    board[i] = boardElements.children[i];
+    board[i].addEventListener("click", cellClick, false);
 }
 
 /* 
@@ -19,3 +20,8 @@ for (let i = 0; i < boardElements.children.length; i++) {
     8. 2 4 6
 */
 
+
+
+function cellClick(e) {
+    console.log(e.currentTarget.id.slice(5));
+}
