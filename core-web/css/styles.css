@@ -6,22 +6,13 @@ html, body {
 
 /* Mobile */
 
-h1 {
-    font-size: 24px;
-    text-align: center;
-}
-
-h2 {
-    text-align: center;
-}
-
 #board {
     margin: 0 auto;
     padding: 0;
 }
 
 #button-restart {
-    
+    display: block;
 }
 
 .cell {
@@ -36,8 +27,21 @@ h2 {
     font-size: 80px;
 }
 
+h1 {
+    font-size: 24px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+}
+
 .winning-cell {
     background-color: forestgreen;
+}
+
+#winning-text {
+    text-transform: uppercase;
 }
 
 /* Tablet */

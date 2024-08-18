@@ -129,6 +129,7 @@ function endGame() {
         + winningCells[0] + ", " + winningCells[1] + ", " + winningCells[2]
         + ")"
     );
+    
     // Denote that a particular player has won via text
     
     // Highlight winning cells
