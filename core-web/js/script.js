@@ -24,12 +24,15 @@ for (let i = 0; i < boardElements.children.length; i++) {
 
 
 function cellClick(e) {
-    e.currentTarget.textContent = turn;
-    console.log(e.currentTarget.id.slice(5));
-    
-    if (turn === "X") {
-        turn = "O"
-    } else {
-        turn = "X";
+    if (e.currentTarget.textContent === "") {
+        e.currentTarget.textContent = turn;
+
+        console.log(e.currentTarget.id.slice(5));
+
+        if (turn === "X") {
+            turn = "O"
+        } else {
+            turn = "X";
+        }
     }
 }
