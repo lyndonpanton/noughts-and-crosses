@@ -11,6 +11,25 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    text-align: center;
+}
+
+#board {
+    margin: 0 auto;
+    padding: 0;
+}
+
+.cell {
+    display: block;
+    float: left;
+    -webkit-margin-collapse: collapse;
+    border: 1px black solid;
+    width: 125px;
+    height: 125px;
+    border-collapse: collapse;
+}
+
 /* Tablet */
 
 /* Laptop */
