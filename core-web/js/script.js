@@ -137,10 +137,24 @@ function endGame() {
     // Denote that a particular player has won via text
     winningText.textContent = (turn + " wins!").toUpperCase();
     
+    let i = 0;
+    
     // Denote that a particular player has won via highlighting winning cells
-    for (let i = 0; i < winningCells.length; i++) {
+    let winningInterval = setInterval(function() {
         board[winningCells[i]].classList.add("winning-cell");
-    }
+        
+        i++;
+        
+        if (i === 3) {
+            clearInterval(winningInterval);
+        }
+    }, 150, 3);
+    
+    // for (let i = 0; i < winningCells.length; i++) {
+    //     setTimeout(function() {
+    //         board[winningCells[0]].classList.add("winning-cell");
+    //     }, 1000);
+    // }
     
     // Remove cell event listeners / Disable cells
     for (let i = 0; i < boardElements.children.length; i++) {

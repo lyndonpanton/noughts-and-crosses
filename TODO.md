@@ -15,7 +15,7 @@
 
 ## User Experience
 
-- [ ] An animation effect should be made when a player takes their turn
+- [x] An animation effect should be made when a player takes their turn
 - [ ] An audio response should be played when a player takes their turn
 - [ ] An animation effect should be made when a player wins
 - [ ] An audio response should be played when a player wins
