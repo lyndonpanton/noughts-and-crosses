@@ -71,8 +71,20 @@ h2 {
     text-align: center;
 }
 
+.occupied-cell {
+    transition: background-color 0.5s;
+    transition-timing-function: ease-in;
+    background-color: lightcoral;
+}
+
+.unoccupied-cell {
+    transition: background-color 0.5s;
+    /*transition-timing-function: ease-in;*/
+    background-color: white;
+}
+
 .winning-cell {
-    background-color: forestgreen;
+    background-color: dodgerblue;
 }
 
 #winning-text {

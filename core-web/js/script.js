@@ -54,7 +54,16 @@ function cellClick(e) {
             endGame();
         }
     } else {
+        console.log("occupied cell clicked");
         // Denote that the cell is currently occupied (temporarily)
+        let currentCell = e.currentTarget;
+        currentCell.classList.remove("unoccupied-cell");
+        currentCell.classList.add("occupied-cell");
+        // e.currentTarget.classList.remove("occupied-cell");
+        setTimeout(function() {
+            currentCell.classList.add("unoccupied-cell");
+            currentCell.classList.remove("occupied-cell");
+        }, 500);
     }
 }
 
