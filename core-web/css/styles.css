@@ -36,6 +36,24 @@ h2 {
     text-align: center;
 }
 
+#nav-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    padding: 0;
+}
+
+.nav-item {
+    flex-basis: 100%;
+
+    list-style-type: none;
+    border: 1px solid silver;
+    border-collapse: collapse;
+    padding: 10px 0;
+    text-align: center;
+}
+
 .winning-cell {
     background-color: forestgreen;
 }

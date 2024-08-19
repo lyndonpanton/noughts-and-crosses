@@ -40,8 +40,6 @@ function startGame() {
 function cellClick(e) {
     if (e.currentTarget.textContent === "") {
         e.currentTarget.textContent = turn;
-
-        console.log(e.currentTarget.id.slice(5));
         
         // Check for win condition
         let gameOver = checkWin(turn);
@@ -56,7 +54,7 @@ function cellClick(e) {
             endGame();
         }
     } else {
-        // Denote that the cell is currently occupied
+        // Denote that the cell is currently occupied (temporarily)
     }
 }
 
