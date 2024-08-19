@@ -9,15 +9,15 @@
 
 ## Pages
 
-- Create the **How to Play** page
-- Create the **About** page
-- Link pages
+- [ ] Create the **How to Play** page
+- [ ] Create the **About** page
+- [ ] Link pages
 
 ## User Experience
 
 - [x] An animation effect should be made when a player takes their turn
 - [ ] An audio response should be played when a player takes their turn
-- [ ] An animation effect should be made when a player wins
+- [x] An animation effect should be made when a player wins
 - [ ] An audio response should be played when a player wins
 
 ## User Interface
