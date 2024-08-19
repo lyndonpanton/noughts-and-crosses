@@ -6,9 +6,21 @@ html, body {
 
 /* Mobile */
 
+/*#board {*/
+/*    display: grid;*/
+/*    grid-template-columns: 33% 33% 33%;*/
+/*    grid-template-rows: 33% 33% 33%;*/
+/*    justify-content: center;*/
+
+/*    margin: 0 auto;*/
+/*    padding: 0;*/
+/*}*/
+
 #board {
     margin: 0 auto;
-    padding: 0;
+    border: 5px solid darkmagenta;
+    width: 300px;
+    height: 300px;
 }
 
 #button-restart {
@@ -16,13 +28,14 @@ html, body {
 }
 
 .cell {
+    box-sizing: border-box;
     display: block;
-    border-collapse: collapse;
     float: left;
-    -webkit-margin-collapse: collapse;
-    border: 1px black solid;
-    width: 125px;
-    height: 125px;
+    margin: 0 auto;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 33.333%;
+    height: 33.333%;
     text-align: center;
     font-size: 80px;
 }
