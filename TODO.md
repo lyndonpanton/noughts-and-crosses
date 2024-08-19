@@ -2,6 +2,7 @@
 
 ## Gameplay
 
+- [ ] Players should be able to pick who is starting
 - [ ] Players should be able to travel back to previous moves using the move
   history [todo](#user-interface)
 - [ ] A record of the games played should be stored and displayed
@@ -21,7 +22,7 @@
 
 ## User Interface
 
-- [ ] Board should be horizontally centered
+- [x] Board should be horizontally centered
 - [ ] Players should be able to see their move history
-- [ ] The play again button should be displayed under the game board
-- [ ] The footer content should be displayed under the game board
+- [x] The play again button should be displayed under the game board
+- [x] The footer content should be displayed under the game board
