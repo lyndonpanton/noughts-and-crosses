@@ -6,25 +6,21 @@ html, body {
 
 /* Mobile */
 
-/*#board {*/
-/*    display: grid;*/
-/*    grid-template-columns: 33% 33% 33%;*/
-/*    grid-template-rows: 33% 33% 33%;*/
-/*    justify-content: center;*/
-
-/*    margin: 0 auto;*/
-/*    padding: 0;*/
-/*}*/
-
 #board {
     margin: 0 auto;
-    border: 5px solid darkmagenta;
+    border: 2px solid darkmagenta;
     width: 300px;
     height: 300px;
 }
 
 #button-restart {
     display: block;
+    margin: 20px auto;
+    border: 2px solid steelblue;
+    border-radius: 5px;
+    padding: 10px 20px;
+    background-color: aliceblue;
+    font-size: 20px;
 }
 
 .cell {
@@ -34,8 +30,8 @@ html, body {
     margin: 0 auto;
     border: 1px solid black;
     border-collapse: collapse;
-    width: 33.333%;
-    height: 33.333%;
+    width: 33.338%;
+    height: 33.338%;
     text-align: center;
     font-size: 80px;
 }
