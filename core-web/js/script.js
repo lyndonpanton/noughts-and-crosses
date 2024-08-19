@@ -24,7 +24,7 @@ function startGame() {
     // 3. State that a random player should start
     turn = "X";
     winningCells = [];
-    winningText.textContent = "";
+    winningText.textContent = "Game in progress...";
     
     // Clear previous cell content
     // Clear previous cell styling
@@ -128,7 +128,7 @@ function checkWin() {
 
 function endGame() {
     // Denote that a particular player has won via text
-    winningText.textContent = turn + " wins!";
+    winningText.textContent = (turn + " wins!").toUpperCase();
     
     // Denote that a particular player has won via highlighting winning cells
     for (let i = 0; i < winningCells.length; i++) {
