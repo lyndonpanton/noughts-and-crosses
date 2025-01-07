@@ -1,0 +1,4 @@
+enum Symbol
+{
+    X, O
+};
