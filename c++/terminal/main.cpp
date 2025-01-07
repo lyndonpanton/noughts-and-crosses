@@ -18,9 +18,8 @@
 
 void delete_record();
 void exit_game(bool&);
-void play_game();
-void play_vs_computer();
-void play_vs_player();
+void play_game_vs_computer();
+void play_game_vs_player();
 void print_game_modes();
 void print_introduction();
 void print_options(std::vector<std::string>&);
@@ -29,8 +28,12 @@ void read_record();
 GameMode set_game_mode();
 void set_game_modes(std::vector<std::string>&);
 void set_options(std::vector<std::string>&);
+void set_starting_symbol(Symbol&);
 void set_symbol(Symbol&);
 void set_symbols(std::vector<char>&);
+void start_game();
+void start_game_vs_computer();
+void start_game_vs_player();
 
 int main()
 {
@@ -59,7 +62,7 @@ int main()
             switch (option)
             {
                 case 1:
-                    play_game();
+                    start_game();
                     break;
                 case 2:
                     read_record();
@@ -95,50 +98,14 @@ void exit_game(bool& playing)
     std::cout << "Thank you for playing!" << std::endl;
 }
 
-void play_game()
+void play_game_vs_computer()
 {
-    std::cout << "Starting up game..." << std::endl;
-    std::cout << std::endl;
 
-    GameMode game_mode = set_game_mode();
-
-    if (game_mode == COMPUTER)
-    {
-        play_vs_computer();
-    } else if (game_mode == PLAYER)
-    {
-        play_vs_player();
-    }
 }
 
-void play_vs_computer()
+void play_game_vs_player()
 {
-    std::cout << std::endl;
-    std::cout << "Starting game vs. Computer..." << std::endl;
 
-    // What symbol are you using (X or O)?
-    Symbol player_symbol;
-    set_symbol(player_symbol);
-
-    if (player_symbol == X)
-    {
-        std::cout << "Player is using Xs" << std::endl;
-    } else
-    {
-        std::cout << "Player is using Os" << std::endl;
-    }
-
-    // Who is going first (X or O)?
-
-    // Determine who is going first based on symbols and order...
-}
-
-void play_vs_player()
-{
-    std::cout << std::endl;
-    std::cout << "Starting game vs. Player..." << std::endl;
-
-    // Who is going first (X or O)?
 }
 
 void print_game_modes()
@@ -178,7 +145,10 @@ void print_options(std::vector<std::string>& options)
 
 void print_symbols(std::vector<char>& symbols)
 {
-
+    for (int i = 0; i < symbols.size(); i++)
+    {
+        std::cout << (i + 1) << ": " << symbols.at(i) << std::endl;
+    }
 }
 
 void read_record()
@@ -239,6 +209,51 @@ void set_options(std::vector<std::string>& options)
     options.push_back("Exit");
 }
 
+void set_starting_symbol(Symbol& starting_symbol)
+{
+    std::cout << std::endl;
+
+    std::vector<char> symbols;
+    set_symbols(symbols);
+
+    bool valid_symbol_chosen = true;
+
+    do
+    {
+        std::cout << "Which symbol is going first (1 - 2)? " << std::endl;
+        std::cout << std::endl;
+
+        for (int i = 0; i < symbols.size(); i++)
+        {
+            std::cout << (i + 1) << ": " << symbols.at(i) << std::endl;
+        }
+
+        std::cout << std::endl;
+
+        int symbol;
+        std::cout << "Enter your choice (1 - 2): ";
+        std::cin >> symbol;
+
+        switch (symbol)
+        {
+            case 1:
+                starting_symbol = X;
+                valid_symbol_chosen = true;
+                break;
+            case 2:
+                starting_symbol = O;
+                valid_symbol_chosen = true;
+                break;
+            default:
+                std::cout << "Invalid option chosen..." << std::endl;
+                valid_symbol_chosen = false;
+        }
+
+        std::cout << std::endl;
+    } while (!valid_symbol_chosen);
+
+}
+
 void set_symbol(Symbol& player_symbol)
 {
     std::cout << std::endl;
@@ -253,10 +268,7 @@ void set_symbol(Symbol& player_symbol)
         std::cout << "What symbol would you like to use (1 - 2)? " << std::endl;
         std::cout << std::endl;
 
-        for (int i = 0; i < symbols.size(); i++)
-        {
-            std::cout << (i + 1) << ": " << symbols.at(i) << std::endl;
-        }
+        print_symbols(symbols);
 
         std::cout << std::endl;
 
@@ -287,4 +299,77 @@ void set_symbols(std::vector<char>& symbols)
 {
     symbols.push_back('X');
     symbols.push_back('O');
+}
+
+void start_game()
+{
+    std::cout << "Starting up game..." << std::endl;
+    std::cout << std::endl;
+
+    GameMode game_mode = set_game_mode();
+
+    if (game_mode == COMPUTER)
+    {
+        start_game_vs_computer();
+    }
+    else if (game_mode == PLAYER)
+    {
+        start_game_vs_player();
+    }
+}
+
+void start_game_vs_computer()
+{
+    std::cout << std::endl;
+    std::cout << "Starting game vs. Computer..." << std::endl;
+
+    // What symbol are you using (X or O)?
+    Symbol player_symbol;
+    set_symbol(player_symbol);
+
+    if (player_symbol == X)
+    {
+        std::cout << "Player is using Xs" << std::endl;
+    }
+    else
+    {
+        std::cout << "Player is using Os" << std::endl;
+    }
+
+    // Who is going first (X or O)?
+    Symbol starting_symbol;
+    set_starting_symbol(starting_symbol);
+
+    if (player_symbol == X)
+    {
+        if (starting_symbol == X)
+        {
+            std::cout << "Player is going first (X)" << std::endl;
+        }
+        else
+        {
+            std::cout << "Computer is going first (O)" << std::endl;
+
+        }
+    } else
+    {
+        if (starting_symbol == X)
+        {
+            std::cout << "Computer is going first (X)" << std::endl;
+        }
+        else
+        {
+            std::cout << "Player is going first (O)" << std::endl;
+        }
+    }
+
+    std::cout << std::endl;
+}
+
+void start_game_vs_player()
+{
+    std::cout << std::endl;
+    std::cout << "Starting game vs. Player..." << std::endl;
+
+    // Who is going first (X or O)?
 }
