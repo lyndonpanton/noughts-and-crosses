@@ -3,10 +3,12 @@
 
 void check_record();
 void choose_game_mode();
-void play_game(bool);
+void clear_record();
+void play_game();
 void print_introduction();
 void print_options(std::vector<std::string>&);
 void set_options(std::vector<std::string>&);
+void exit_game(bool&);
 
 int main()
 {
@@ -16,13 +18,43 @@ int main()
     
     set_options(options);
 
-    bool playing = false;
+    bool playing = true;
 
     while (playing)
     {
-        print_options(options);
+        bool valid_option = true;
 
-        break;
+        do
+        {
+            int option;
+            print_options(options);
+            
+            std::cout << "Enter your option (1 - 4): ";
+            std::cin >> option;
+
+            std::cout << std::endl;
+
+            switch (option)
+            {
+                case 1:
+                    play_game();
+                    break;
+                case 2:
+                    check_record();
+                    break;
+                case 3:
+                    clear_record();
+                    break;
+                case 4:
+                    exit_game(playing);
+                    break;
+                default:
+                    valid_option = false;
+                    std::cout << "Invalid option chosen..." << std::endl;
+            }
+
+            std::cout << std::endl;
+        } while (!valid_option);
     }
 
     return 0;
@@ -35,7 +67,25 @@ void check_record()
     // Print player vs. player record (separate records by xs and os)
 }
 
-void play_game(bool isXFirst)
+void clear_record()
+{
+
+}
+
+void choose_game_mode()
+{
+
+}
+
+void exit_game(bool& playing)
+{
+    playing = false;
+
+    std::cout << std::endl;
+    std::cout << "Thank you for playing!" << std::endl;
+}
+
+void play_game()
 {
 
 }
