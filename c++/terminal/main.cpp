@@ -377,9 +377,19 @@ void start_game_vs_computer()
     std::cout << std::endl;
 
     Board board;
-    board.print_board();
+    board.print_board(true);
 
     // Start game loop...
+
+    /*
+        Requirements
+
+        - Player should enter a number 1 to 9
+        - Player should be asked to enter a number again if an invalid number is
+        entered
+        - Computer should retrieve all empty cells
+        - Computer should pick a random empty cell to place their symbol in
+    */
 }
 
 void start_game_vs_player()
@@ -402,7 +412,13 @@ void start_game_vs_player()
     std::cout << std::endl;
 
     Board board;
-    board.print_board();
+    board.print_board(true);
 
     // Start game loop...
+
+    /*
+        Requirements
+
+        - Player 
+    */
 }

@@ -13,7 +13,7 @@ public:
     Board();
     char* get_board() const;
     char& operator[](size_t);
-    void print_board() const;
+    void print_board(bool guide) const;
 };
 
 #endif

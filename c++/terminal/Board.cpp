@@ -10,27 +10,34 @@ char* Board::get_board() const
     return m_board;
 }
 
-void Board::print_board() const
+void Board::print_board(bool guide) const
 {
     for (int i = 0; i < m_size; i++)
     {
         if (i % 3 == 0)
         {
-            for (int i = 0; i < 10; i++) std::cout << "-";
+            for (int i = 0; i < 13; i++) std::cout << "-";
             std::cout << std::endl << "|";
         }
-        
-        if (m_board[i] == 'X')
+
+        if (guide)
         {
-            std::cout << " X " << "|";
-        }
-        else if (m_board[i] == 'O')
-        {
-            std::cout << " O " << "|";
+            std::cout << " " << (i + 1) << " " << "|";
         }
         else
         {
-            std::cout << "  " << "|";
+            if (m_board[i] == 'X')
+            {
+                std::cout << " X " << "|";
+            }
+            else if (m_board[i] == 'O')
+            {
+                std::cout << " O " << "|";
+            }
+            else
+            {
+                std::cout << "   " << "|";
+            }
         }
 
         // Match: 2, 5, 8
@@ -41,7 +48,7 @@ void Board::print_board() const
 
         if (i == m_size - 1)
         {
-            for (int i = 0; i < 10; i++) std::cout << "-";
+            for (int i = 0; i < 13; i++) std::cout << "-";
             std::cout << std::endl;
         }
     }
