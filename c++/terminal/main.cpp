@@ -2,6 +2,17 @@
 #include <vector>
 #include "GameMode.h"
 #include "Symbol.h"
+#include "Board.h"
+
+/*
+    Input format:
+
+    { int } { int }
+
+    0 <= int <= 2
+
+    i.e., 1 2 => second row (index 1), third column (index 2)
+*/
 
 /*
     Todo
@@ -364,6 +375,11 @@ void start_game_vs_computer()
     }
 
     std::cout << std::endl;
+
+    Board board;
+    board.print_board();
+
+    // Start game loop...
 }
 
 void start_game_vs_player()
@@ -384,4 +400,9 @@ void start_game_vs_player()
     }
 
     std::cout << std::endl;
+
+    Board board;
+    board.print_board();
+
+    // Start game loop...
 }
