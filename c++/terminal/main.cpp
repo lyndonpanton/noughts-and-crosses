@@ -372,4 +372,16 @@ void start_game_vs_player()
     std::cout << "Starting game vs. Player..." << std::endl;
 
     // Who is going first (X or O)?
+    Symbol starting_symbol;
+    set_starting_symbol(starting_symbol);
+
+    if (starting_symbol == X)
+    {
+        std::cout << "X is going first..." << std::endl;
+    } else
+    {
+        std::cout << "O is going first..." << std::endl;
+    }
+
+    std::cout << std::endl;
 }
