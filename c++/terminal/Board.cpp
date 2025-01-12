@@ -10,6 +10,19 @@ char* Board::get_board() const
     return m_board;
 }
 
+void Board::initialise_board()
+{
+    for (int i = 0; i < m_size; i++)
+    {
+        m_board[i] = ' ';
+    }
+}
+
+char& Board::operator[](size_t index)
+{
+    return m_board[index];
+}
+
 void Board::print_board(bool guide) const
 {
     for (int i = 0; i < m_size; i++)
@@ -54,7 +67,20 @@ void Board::print_board(bool guide) const
     }
 }
 
-char& Board::operator[](size_t index)
+bool Board::set_board(int position, Symbol symbol)
 {
-    return m_board[index];
+    if (get_board()[position - 1] == ' ')
+    {
+        if (symbol == X) m_board[position - 1] = 'X';
+        else m_board[position - 1] = 'O';
+        
+        return true;
+    }
+    
+    return false;
+}
+
+bool Board::winner_found()
+{
+    return false;
 }

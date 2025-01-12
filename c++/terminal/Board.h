@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Symbol.h"
 
 #ifndef BOARD_H
 
@@ -12,8 +13,11 @@ class Board
 public:
     Board();
     char* get_board() const;
+    void initialise_board();
     char& operator[](size_t);
-    void print_board(bool guide) const;
+    void print_board(bool) const;
+    bool set_board(int, Symbol);
+    bool winner_found();
 };
 
 #endif

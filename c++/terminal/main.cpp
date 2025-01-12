@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include "GameMode.h"
-#include "Symbol.h"
+// "Symbol.h" is in "Board.h"
 #include "Board.h"
 
 /*
@@ -29,6 +29,7 @@
 
 void delete_record();
 void exit_game(bool&);
+void player_place_symbol(Board&, Symbol&);
 void play_game_vs_computer();
 void play_game_vs_player();
 void print_game_modes();
@@ -117,6 +118,41 @@ void play_game_vs_computer()
 void play_game_vs_player()
 {
 
+}
+
+void player_place_symbol(Board& board, Symbol& symbol)
+{
+    bool valid_position = false;
+
+    while (!valid_position)
+    {
+        int position;
+
+        std::cout << "Where would you like to place you like to place your ";
+        std::cout << "symbol (1 - 9)? ";
+
+        std::cin >> position;
+
+        // 0 < position && position < 10
+
+        if (0 < position && position < 10)
+        {
+            if (board.set_board(position, symbol))
+            {
+                valid_position = true;
+            }
+            else
+            {
+                std::cout << "Invalid position entered..." << std::endl;
+            }
+        }
+        else
+        {
+            std::cout << "Invalid position entered..." << std::endl;
+        }
+
+        std::cout << std::endl;
+    }
 }
 
 void print_game_modes()
@@ -248,11 +284,11 @@ void set_starting_symbol(Symbol& starting_symbol)
         switch (symbol)
         {
             case 1:
-                starting_symbol = X;
+                starting_symbol = Symbol::X;
                 valid_symbol_chosen = true;
                 break;
             case 2:
-                starting_symbol = O;
+                starting_symbol = Symbol::O;
                 valid_symbol_chosen = true;
                 break;
             default:
@@ -290,11 +326,11 @@ void set_symbol(Symbol& player_symbol)
         switch (symbol)
         {
             case 1:
-                player_symbol = X;
+                player_symbol = Symbol::X;
                 valid_symbol_chosen = true;
                 break;
             case 2:
-                player_symbol = O;
+                player_symbol = Symbol::O;
                 valid_symbol_chosen = true;
                 break;
             default:
@@ -412,7 +448,11 @@ void start_game_vs_player()
     std::cout << std::endl;
 
     Board board;
-    board.print_board(true);
+    board.initialise_board();
+
+    Symbol current_player = starting_symbol;
+    bool first_turn = true;
+    bool winner = false;
 
     // Start game loop...
 
@@ -421,4 +461,27 @@ void start_game_vs_player()
 
         - Player 
     */
+    while (!winner)
+    {
+        board.print_board(first_turn);
+
+        if (first_turn) first_turn = !first_turn;
+
+        if (current_player == X)
+        {
+            std::cout << "X's turn" << std::endl;
+        }
+        else
+        {
+            std::cout << "Os turn" << std::endl;
+        }
+        
+        std::cout << std::endl; 
+
+        player_place_symbol(board, current_player);
+
+        current_player = (current_player == Symbol::X) ? Symbol::O : Symbol::X;
+
+        std::cout << std::endl;
+    }   
 }
