@@ -18,6 +18,16 @@ void Board::initialise_board()
     }
 }
 
+bool Board::is_full() const
+{
+    for (int i = 0; i < m_size; i++)
+    {
+        if (m_board[i] == ' ' ) return false;
+    }
+
+    return true;
+}
+
 char& Board::operator[](size_t index)
 {
     return m_board[index];
@@ -82,5 +92,55 @@ bool Board::set_board(int position, Symbol symbol)
 
 bool Board::winner_found()
 {
-    return false;
+    /*
+        Win conditions
+
+        1, 2, 3
+        4, 5, 6
+        7, 8, 9
+
+        1, 4, 7
+        2, 5, 8
+        3, 6, 9
+
+        1, 5, 9
+        3, 5, 7
+    */
+
+    if (m_board[0] != ' ' && m_board[0] == m_board[1] && m_board[1] == m_board[2])
+    {
+        return true;
+    }
+    else if (m_board[3] != ' ' && m_board[3] == m_board[4] && m_board[4] == m_board[5])
+    {
+        return true;
+    }
+    else if (m_board[6] != ' ' && m_board[6] == m_board[7] && m_board[7] == m_board[8])
+    {
+        return true;
+    }
+    else if (m_board[0] != ' ' && m_board[0] == m_board[3] && m_board[3] == m_board[6])
+    {
+        return true;
+    }
+    else if (m_board[1] != ' ' && m_board[1] == m_board[4] && m_board[4] == m_board[7])
+    {
+        return true;
+    }
+    else if (m_board[2] != ' ' && m_board[2] == m_board[5] && m_board[5] == m_board[8])
+    {
+        return true;
+    }
+    else if (m_board[0] != ' ' && m_board[0] == m_board[4] && m_board[4] == m_board[8])
+    {
+        return true;
+    }
+    else if (m_board[2] != ' ' && m_board[2] == m_board[4] && m_board[4] == m_board[6])
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }

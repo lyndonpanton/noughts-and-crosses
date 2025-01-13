@@ -14,6 +14,7 @@ public:
     Board();
     char* get_board() const;
     void initialise_board();
+    bool is_full() const;
     char& operator[](size_t);
     void print_board(bool) const;
     bool set_board(int, Symbol);

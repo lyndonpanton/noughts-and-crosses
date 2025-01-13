@@ -21,7 +21,8 @@
     - Player can clear records of the games
     - Player can choose to play against another player or the computer
     - Player can choose to play as Xs or Os
-    - 
+    - Record is updated when player finishes game (vs. computer)
+    - Record is updated when player finishes game (vs. player)
 
     - Change all "set" functions to return void
     - Change all "get" functions to return a type
@@ -453,6 +454,7 @@ void start_game_vs_player()
     Symbol current_player = starting_symbol;
     bool first_turn = true;
     bool winner = false;
+    bool full = false;
 
     // Start game loop...
 
@@ -461,7 +463,7 @@ void start_game_vs_player()
 
         - Player 
     */
-    while (!winner)
+    while (!winner && !full)
     {
         board.print_board(first_turn);
 
@@ -480,8 +482,27 @@ void start_game_vs_player()
 
         player_place_symbol(board, current_player);
 
-        current_player = (current_player == Symbol::X) ? Symbol::O : Symbol::X;
-
         std::cout << std::endl;
-    }   
+
+        winner = board.winner_found();
+        full = board.is_full();
+
+        if (!winner) current_player = (current_player == Symbol::X) ? Symbol::O : Symbol::X;
+    }
+
+    board.print_board(first_turn);
+
+    if (winner)
+    {
+        if (current_player == Symbol::X) std::cout << "X ";
+        else std::cout << "O ";
+        
+        std::cout << "wins! Kudos to you!" << std::endl;
+    }
+    else
+    {
+        std::cout << "Game is a draw..." << std::endl;
+    }
+
+    std::cout << std::endl;
 }
