@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <ctime>
+
 #include "GameMode.h"
 // "Symbol.h" is in "Board.h"
 #include "Board.h"
@@ -23,11 +25,13 @@
     - Player can choose to play as Xs or Os
     - Record is updated when player finishes game (vs. computer)
     - Record is updated when player finishes game (vs. player)
+    - Add destructor to RAII Board class
 
     - Change all "set" functions to return void
     - Change all "get" functions to return a type
 */
 
+void computer_place_symbol(Board&, Symbol&);
 void delete_record();
 void exit_game(bool&);
 void player_place_symbol(Board&, Symbol&);
@@ -96,6 +100,40 @@ int main()
     }
 
     return 0;
+}
+
+void computer_place_symbol(Board& board, Symbol& symbol)
+{
+    int size = 0;
+
+    for (int i = 0; i < board.get_size(); i++)
+    {
+        if (board.get_board()[i] == ' ')
+        {
+            size++;
+        }
+    }
+
+    int* valid_tile_indexes = new int[size];
+    int index = 0;
+
+    for (int i = 0; i < board.get_size(); i++)
+    {
+        if (board.get_board()[i] == ' ')
+        {
+            // Board is 1-index based
+            valid_tile_indexes[index] = i + 1;
+            index++;
+        }
+    }
+
+    srand(time(0));
+    
+    int position = valid_tile_indexes[rand() % size];
+    std::cout << "Computer placed symbol at position " << position << std::endl;
+    board.set_board(position, symbol);
+
+    std::cout << std::endl;
 }
 
 void delete_record()
@@ -414,7 +452,12 @@ void start_game_vs_computer()
     std::cout << std::endl;
 
     Board board;
-    board.print_board(true);
+    board.initialise_board();
+
+    Symbol current_player = starting_symbol;
+    bool first_turn = true;
+    bool winner = false;
+    bool full = false;
 
     // Start game loop...
 
@@ -427,6 +470,60 @@ void start_game_vs_computer()
         - Computer should retrieve all empty cells
         - Computer should pick a random empty cell to place their symbol in
     */
+    while (!winner && !full)
+    {
+        board.print_board(first_turn);
+
+        if (first_turn) first_turn = !first_turn;
+
+        if (current_player == X)
+        {
+            std::cout << "X's turn" << std::endl;
+        }
+        else
+        {
+            std::cout << "Os turn" << std::endl;
+        }
+
+        if (current_player == player_symbol)
+        {
+            player_place_symbol(board, current_player);
+        }
+        else
+        {
+            computer_place_symbol(board, current_player);
+        }
+        
+        std::cout << std::endl;
+        std::cout << std::endl;
+
+        winner = board.winner_found();
+        full = board.is_full();
+
+        if (!winner) current_player = (current_player == Symbol::X) ? Symbol::O : Symbol::X;
+    }
+
+    board.print_board(first_turn);
+
+    if (winner)
+    {
+        if (current_player == Symbol::X && player_symbol == X
+            || current_player == Symbol::O && player_symbol == O
+        )
+        {
+            std::cout << "You win! Good job!" << std::endl;
+        }
+        else
+        {
+            std::cout << "Computer wins... Better luck next time..." << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "Game is a draw..." << std::endl;
+    }
+
+    std::cout << std::endl;
 }
 
 void start_game_vs_player()
@@ -455,14 +552,7 @@ void start_game_vs_player()
     bool first_turn = true;
     bool winner = false;
     bool full = false;
-
-    // Start game loop...
-
-    /*
-        Requirements
-
-        - Player 
-    */
+    
     while (!winner && !full)
     {
         board.print_board(first_turn);

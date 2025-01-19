@@ -10,6 +10,11 @@ char* Board::get_board() const
     return m_board;
 }
 
+int Board::get_size() const
+{
+    return m_size;
+}
+
 void Board::initialise_board()
 {
     for (int i = 0; i < m_size; i++)
@@ -22,7 +27,7 @@ bool Board::is_full() const
 {
     for (int i = 0; i < m_size; i++)
     {
-        if (m_board[i] == ' ' ) return false;
+        if (m_board[i] == ' ') return false;
     }
 
     return true;

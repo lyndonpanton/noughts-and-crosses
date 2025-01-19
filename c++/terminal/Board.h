@@ -13,6 +13,7 @@ class Board
 public:
     Board();
     char* get_board() const;
+    int get_size() const;
     void initialise_board();
     bool is_full() const;
     char& operator[](size_t);
