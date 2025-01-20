@@ -5,6 +5,11 @@ Board::Board()
     
 }
 
+Board::~Board()
+{
+    delete [] m_board;
+}
+
 char* Board::get_board() const
 {
     return m_board;

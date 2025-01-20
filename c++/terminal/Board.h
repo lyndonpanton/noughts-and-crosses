@@ -12,6 +12,7 @@ class Board
 
 public:
     Board();
+    ~Board();
     char* get_board() const;
     int get_size() const;
     void initialise_board();
