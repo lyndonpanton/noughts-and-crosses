@@ -31,10 +31,6 @@
 /*
     Todo
 
-    - Player can clear records of the games
-    - Player can update records of the games
-    - Record is updated when player finishes game (vs. computer)
-    - Record is updated when player finishes game (vs. player)
     - Add destructor to RAII Board class
 
     - Change all "set" functions to return void
