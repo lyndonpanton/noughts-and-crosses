@@ -31,8 +31,6 @@
 /*
     Todo
 
-    - Add destructor to RAII Board class
-
     - Change all "set" functions to return void
     - Change all "get" functions to return a type
 */
