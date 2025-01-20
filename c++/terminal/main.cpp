@@ -164,9 +164,6 @@ void exit_game(bool& playing)
 
 void get_record()
 {
-    // std::cout << std::endl;
-
-    // std::ifstream record("record.txt");
     std::ifstream record("record.txt");
 
     if (record.good())
@@ -205,16 +202,6 @@ void get_record()
     std::cout << std::endl;
 
     record.close();
-}
-
-void play_game_vs_computer()
-{
-
-}
-
-void play_game_vs_player()
-{
-
 }
 
 void player_place_symbol(Board& board, Symbol& symbol)
