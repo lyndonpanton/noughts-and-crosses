@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <ctime>
+#include <fstream>
 
 #include "GameMode.h"
 // "Symbol.h" is in "Board.h"
@@ -17,12 +18,22 @@
 */
 
 /*
+    Record format:
+    
+    { Player 1 wins vs. Player }
+    { Player 2 wins vs. Player }
+    { Empty line }
+    { Player wins vs. Computer }
+    { Computer wins vs. Computer }
+
+*/
+
+/*
     Todo
 
     - Player can check records of the games
     - Player can clear records of the games
-    - Player can choose to play against another player or the computer
-    - Player can choose to play as Xs or Os
+    - Player can update records of the games
     - Record is updated when player finishes game (vs. computer)
     - Record is updated when player finishes game (vs. player)
     - Add destructor to RAII Board class
@@ -34,6 +45,7 @@
 void computer_place_symbol(Board&, Symbol&);
 void delete_record();
 void exit_game(bool&);
+void get_record();
 void player_place_symbol(Board&, Symbol&);
 void play_game_vs_computer();
 void play_game_vs_player();
@@ -51,6 +63,7 @@ void set_symbols(std::vector<char>&);
 void start_game();
 void start_game_vs_computer();
 void start_game_vs_player();
+void update_record(GameMode&, bool);
 
 int main()
 {
@@ -82,7 +95,7 @@ int main()
                     start_game();
                     break;
                 case 2:
-                    read_record();
+                    get_record();
                     break;
                 case 3:
                     delete_record();
@@ -147,6 +160,51 @@ void exit_game(bool& playing)
 
     std::cout << std::endl;
     std::cout << "Thank you for playing!" << std::endl;
+}
+
+void get_record()
+{
+    // std::cout << std::endl;
+
+    // std::ifstream record("record.txt");
+    std::ifstream record("record.txt");
+
+    if (record.good())
+    {
+        int player_one_win_count;
+        int player_two_win_count;
+        int player_vs_computer_win_count;
+        int computer_vs_player_win_count;
+
+        while (record >> player_one_win_count)
+        {
+            record >> player_two_win_count >> player_vs_computer_win_count
+                >> computer_vs_player_win_count;
+
+            std::cout << "Player one has won " << player_one_win_count;
+            std::cout << " time(s)!" << std::endl;
+
+            std::cout << "Player two has won " << player_two_win_count;
+            std::cout << " time(s)!" << std::endl;
+
+            
+            std::cout << "Player has won (vs. Computer) ";
+            std::cout << player_vs_computer_win_count << " time(s)!" << std::endl;
+
+            std::cout << "Player has won " << computer_vs_player_win_count;
+            std::cout << " time(s)!" << std::endl;
+        }
+
+        std::cout << std::endl << "Record updated" << std::endl;
+    }
+    else
+    {
+        std::cout << "Record file not found..." << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    record.close();
 }
 
 void play_game_vs_computer()
@@ -235,14 +293,6 @@ void print_symbols(std::vector<char>& symbols)
     {
         std::cout << (i + 1) << ": " << symbols.at(i) << std::endl;
     }
-}
-
-void read_record()
-{
-    // Print Player vs. Computer record
-
-    // Print player vs. player record (separate records by xs and os)
-    std::cout << "Record checked..." << std::endl;
 }
 
 GameMode set_game_mode()
@@ -595,4 +645,36 @@ void start_game_vs_player()
     }
 
     std::cout << std::endl;
+}
+
+void update_record(GameMode& game_mode, bool winner)
+{
+    // For COMPUTER game mode, winner == false means computer won and winner ==
+    // true means player won
+
+    // For PLAYER game mode, winner == false means player 2 won and winner ==
+    // true means player 1 won
+
+    if (game_mode == COMPUTER)
+    {
+        if (winner)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+    else
+    {
+        if (winner)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
 }
