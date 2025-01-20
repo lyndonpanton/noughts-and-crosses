@@ -31,7 +31,6 @@
 /*
     Todo
 
-    - Player can check records of the games
     - Player can clear records of the games
     - Player can update records of the games
     - Record is updated when player finishes game (vs. computer)
@@ -53,7 +52,6 @@ void print_game_modes();
 void print_introduction();
 void print_options(std::vector<std::string>&);
 void print_symbols(std::vector<char>&);
-void read_record();
 GameMode set_game_mode();
 void set_game_modes(std::vector<std::string>&);
 void set_options(std::vector<std::string>&);
@@ -151,7 +149,26 @@ void computer_place_symbol(Board& board, Symbol& symbol)
 
 void delete_record()
 {
-    std::cout << "Record cleared..." << std::endl;
+    std::ofstream record("record.txt");
+
+    if (record.good())
+    {
+        record << 0 << std::endl
+                << 0 << std::endl
+                << "" << std::endl
+                << 0 << std::endl
+                << 0 << std::endl;
+
+        std::cout << "Record has been reset" << std::endl;
+    }
+    else
+    {
+        std::cout << "Record file not found..." << std::endl;
+    }
+
+    std::cout << std::endl;
+
+    record.close();
 }
 
 void exit_game(bool& playing)
