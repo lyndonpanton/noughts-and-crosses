@@ -46,8 +46,6 @@ void delete_record();
 void exit_game(bool&);
 void get_record();
 void player_place_symbol(Board&, Symbol&);
-void play_game_vs_computer();
-void play_game_vs_player();
 void print_game_modes();
 void print_introduction();
 void print_options(std::vector<std::string>&);
@@ -61,7 +59,7 @@ void set_symbols(std::vector<char>&);
 void start_game();
 void start_game_vs_computer();
 void start_game_vs_player();
-void update_record(GameMode&, bool);
+void update_record(GameMode, bool);
 
 int main()
 {
@@ -561,15 +559,15 @@ void start_game_vs_computer()
 
     if (winner)
     {
-        if (current_player == Symbol::X && player_symbol == X
-            || current_player == Symbol::O && player_symbol == O
-        )
+        if (current_player == player_symbol)
         {
             std::cout << "You win! Good job!" << std::endl;
+            update_record(GameMode::COMPUTER, true);
         }
         else
         {
             std::cout << "Computer wins... Better luck next time..." << std::endl;
+            update_record(GameMode::COMPUTER, false);
         }
     }
     else
@@ -648,10 +646,20 @@ void start_game_vs_player()
         std::cout << "Game is a draw..." << std::endl;
     }
 
+    if (winner == starting_symbol)
+    {
+        // Winner is player 1
+        update_record(GameMode::PLAYER, true);
+    }
+    else
+    {
+        update_record(GameMode::PLAYER, false);
+    }
+
     std::cout << std::endl;
 }
 
-void update_record(GameMode& game_mode, bool winner)
+void update_record(GameMode game_mode, bool winner)
 {
     // For COMPUTER game mode, winner == false means computer won and winner ==
     // true means player won
@@ -659,26 +667,91 @@ void update_record(GameMode& game_mode, bool winner)
     // For PLAYER game mode, winner == false means player 2 won and winner ==
     // true means player 1 won
 
-    if (game_mode == COMPUTER)
-    {
-        if (winner)
-        {
+    std::ifstream record("record.txt");
 
+    int player_one_wins = 0;
+    int player_two_wins = 0;
+    int player_vs_computer_wins = 0;
+    int computer_vs_player_wins = 0;
+
+    if (record.good())
+    {
+
+        record >> player_one_wins >> player_two_wins >> player_vs_computer_wins
+            >> computer_vs_player_wins;
+        
+        if (game_mode == COMPUTER)
+        {
+            if (winner)
+            {
+                player_vs_computer_wins++;
+            }
+            else
+            {
+                computer_vs_player_wins++;
+            }
         }
         else
         {
-
+            if (winner)
+            {
+                player_one_wins++;
+            }
+            else
+            {
+                player_two_wins++;
+            }
         }
+
+        std::ofstream updated_record("record.txt");
+
+        updated_record << player_one_wins << std::endl;
+        updated_record << player_two_wins << std::endl;
+        updated_record << std::endl;
+        updated_record << player_vs_computer_wins << std::endl;
+        updated_record << computer_vs_player_wins << std::endl;
+
+        updated_record.close();
     }
     else
     {
-        if (winner)
-        {
+        std::ofstream new_record("record.txt");
 
+        if (game_mode == COMPUTER)
+        {
+            if (winner)
+            {
+                player_vs_computer_wins++;
+            }
+            else
+            {
+                computer_vs_player_wins++;
+            }
         }
         else
         {
-
+            if (winner)
+            {
+                player_one_wins++;
+            }
+            else
+            {
+                player_two_wins++;
+            }
         }
+
+        new_record << player_one_wins << std::endl;
+        new_record << player_two_wins << std::endl;
+        new_record << std::endl;
+        new_record << player_vs_computer_wins << std::endl;
+        new_record << computer_vs_player_wins << std::endl;
+
+        new_record.close();
     }
+
+    record.close();
+
+    std::cout << "Record updated" << std::endl;
+
+    std::cout << std::endl;
 }
